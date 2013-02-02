@@ -1,0 +1,16 @@
+{
+    "name": "mead-steve/blip-foto",
+	"description": "PHP Client for the blipfoto API",
+	"type": "library",
+	"version": "0.0.1",
+	"license": "MIT",
+    "require": {
+        "php": ">=5.3.0",
+		"guzzle/guzzle": "~3.1"
+    },
+	"autoload": {
+        "psr-0": {
+            "Container": "src/"
+        }
+    }
+}
