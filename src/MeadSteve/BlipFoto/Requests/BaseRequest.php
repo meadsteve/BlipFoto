@@ -38,4 +38,33 @@ abstract class BaseRequest
 	public function get() {
 		return $this->request->send()->json();
 	}
+
+		/**
+	 * Converts the input $date in to a format the blip API will understand.
+	 * @param $dateInput
+	 * @return string
+	 * @throws \InvalidArgumentException If the $date can't be understood.
+	 */
+	protected function getProcessedDate($dateInput) {
+		if ($dateInput instanceOf \DateTime) {
+			return $dateInput->format(static::FORMAT_Date);
+		}
+		else if ($dateInput instanceOf \DatePeriod) {
+			$arr = array();
+			foreach($dateInput as $singleDate) {
+				$arr[] = $singleDate;
+			}
+			return $this->getProcessedDate($arr);
+		}
+		else if(is_string($dateInput)) {
+			return $dateInput;
+		}
+		else if(is_array($dateInput)) {
+			array_walk($dateInput, array($this, 'getProcessedDate'));
+			return implode(',', $dateInput);
+		}
+		else {
+			throw new \InvalidArgumentException('$date parameter not understood');
+		}
+	}
 }

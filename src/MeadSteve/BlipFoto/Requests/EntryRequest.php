@@ -41,8 +41,8 @@ class EntryRequest
 
 	/**
 	 * Sets the entry_date parameter. This can be a string, a datetime object,
-	 * an array of either, or a mixed array of both.
-	 * @param string|\DateTime|string[]|\DateTime[] $date
+	 * an array of either, a mixed array of both or a \DatePeriod.
+	 * @param string|\DateTime|string[]|\DateTime[]|DatePeriod $date
 	 * @return EntryRequest
 	 * @throws \InvalidArgumentException if the $date is not of an allowed type.
 	 */
@@ -103,27 +103,5 @@ class EntryRequest
 		}
 
 		return parent::get();
-	}
-
-	/**
-	 * Converts the input $date in to a format the blip API will understand.
-	 * @param $date
-	 * @return string
-	 * @throws \InvalidArgumentException If the $date can't be understood.
-	 */
-	private function getProcessedDate($date) {
-		if ($date instanceOf \DateTime) {
-			return $date->format(static::FORMAT_Date);
-		}
-		else if(is_string($date)) {
-			return $date;
-		}
-		else if(is_array($date)) {
-			array_walk($date, array($this, 'getProcessedDate'));
-			return implode(',', $date);
-		}
-		else {
-			throw new \InvalidArgumentException('$date parameter not understood');
-		}
 	}
 }
