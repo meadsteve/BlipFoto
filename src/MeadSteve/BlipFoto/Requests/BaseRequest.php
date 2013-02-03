@@ -65,7 +65,7 @@ abstract class BaseRequest
 			return $dateInput;
 		}
 		else if(is_array($dateInput)) {
-			array_walk($dateInput, array($this, 'getProcessedDate'));
+			$dateInput = array_map(array($this, 'getProcessedDate'), $dateInput);
 			return implode(',', $dateInput);
 		}
 		else {
