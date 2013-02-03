@@ -1,6 +1,12 @@
 <?php
 namespace MeadSteve\BlipFoto;
 
+/**
+ * @package    PHP blipfoto.com API
+ * @author     Steve B <meadsteve@gmail.com>
+ * @license    http://www.opensource.org/licenses/mit-license.html MIT License
+ */
+
 use Guzzle\Http\Client as GuzzleClient;
 
 include_once __DIR__ . "/bootstrap.php";
